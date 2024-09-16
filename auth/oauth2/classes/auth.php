@@ -571,7 +571,7 @@ class auth extends \auth_plugin_base {
                     redirect(new moodle_url('/login/index.php'));
                 }
 
-                if (!empty($CFG->authpreventaccountcreation)) {
+                if (!empty($CFG->authpreventaccountcreation) && ($issuer->get('name') !== 'my-identity-issuer-name')) {
                     // Trigger login failed event.
                     $failurereason = AUTH_LOGIN_UNAUTHORISED;
                     $event = \core\event\user_login_failed::create(['other' => ['username' => $userinfo['username'],
